@@ -12,18 +12,7 @@ module.exports = async (req, res) => {
   }
 
   try {
-    let body = {};
-    if (req.body) {
-      body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-    } else {
-      body = await new Promise((resolve, reject) => {
-        let data = '';
-        req.on('data', chunk => { data += chunk; });
-        req.on('end', () => { resolve(data ? JSON.parse(data) : {}); });
-        req.on('error', reject);
-      });
-    }
-
+    const body = req.body || {};
     const orderNumber = 'SN-' + Math.random().toString(36).toUpperCase().slice(2, 10);
 
     return res.status(200).json({
