@@ -12,7 +12,6 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const body = req.body || {};
     const orderNumber = 'SN-' + Math.random().toString(36).toUpperCase().slice(2, 10);
 
     return res.status(200).json({
@@ -20,17 +19,17 @@ module.exports = async (req, res) => {
       orderNumber,
       order: {
         orderNumber,
-        name: body.name,
-        email: body.email,
-        address: body.address,
-        city: body.city,
-        postal: body.postal,
-        items: body.items,
-        total: body.total,
+        name: null,
+        email: null,
+        address: null,
+        city: null,
+        postal: null,
+        items: null,
+        total: null,
         createdAt: new Date().toISOString(),
       },
     });
   } catch (err) {
-    return res.status(500).json({ ok: false, error: err.message || 'Server error' });
+    return res.status(500).json({ ok: false, error: String(err) });
   }
 };
