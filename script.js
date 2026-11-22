@@ -113,18 +113,51 @@ cancelCheckout.addEventListener('click', () => {
   checkout.style.display = 'none';
 });
 
-checkoutForm.addEventListener('submit', (e) => {
+checkoutForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const formData = new FormData(checkoutForm);
-  const address = formData.get('address');
-  const num = 'SN-' + Math.random().toString(36).toUpperCase().slice(2, 10);
-  orderNumberEl.textContent = num;
-  orderAddressEl.textContent = address;
-  cart = [];
-  saveCart();
-  checkout.style.display = 'none';
-  confirmation.style.display = 'block';
-  confirmation.scrollIntoView({ behavior: 'smooth' });
+  const payload = {
+    name: formData.get('name'),
+    email: formData.get('email'),
+    address: formData.get('address'),
+    city: formData.get('city'),
+    postal: formData.get('postal'),
+    items: cart.map(i => ({ id: i.id, name: i.name, qty: i.qty, price: i.price })),
+    total: totalAmount(),
+  };
+
+  const submitBtn = checkoutForm.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.textContent = 'Placing order...';
+  submitBtn.disabled = true;
+
+  try {
+    const response = await fetch('/api/place-order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await response.json();
+
+    if (!response.ok || !data.ok) {
+      throw new Error(data.error || 'Order failed');
+    }
+
+    orderNumberEl.textContent = data.orderNumber;
+    orderAddressEl.textContent = payload.address;
+    cart = [];
+    saveCart();
+    checkout.style.display = 'none';
+    confirmation.style.display = 'block';
+    confirmation.scrollIntoView({ behavior: 'smooth' });
+  } catch (err) {
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+    alert('Demo order could not be placed. Please try again.');
+  } finally {
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+  }
 });
 
 continueShopping.addEventListener('click', () => {
