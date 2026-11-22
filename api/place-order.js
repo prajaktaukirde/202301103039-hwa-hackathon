@@ -12,11 +12,7 @@ module.exports = async (req, res) => {
   }
 
   try {
-    let body = {};
-    if (req.body) {
-      body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-    }
-
+    const body = req.body || {};
     const orderNumber = 'SN-' + Math.random().toString(36).toUpperCase().slice(2, 10);
 
     return res.status(200).json({
