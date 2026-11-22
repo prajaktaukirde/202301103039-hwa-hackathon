@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SniffShift &mdash; Timed-Drawer Dog Puzzle</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+<div class="container header-inner">
+<a href="#" class="logo">SNIFFSHIFT</a>
+<button class="cart-toggle" id="cartToggle" aria-label="Open cart">Cart <span id="cartCount">0</span></button>
+</div>
+</header>
+
+<main class="container product-page">
+<section class="product">
+<div class="product-media">
+<div class="placeholder" aria-label="SniffShift dog puzzle">SniffShift</div>
+</div>
+<div class="product-info">
+<h1>SniffShift Timed-Drawer Dog Puzzle</h1>
+<p class="price">$49.00</p>
+<p class="tagline">Keep your dog coming back all day</p>
+
+<h2>How it works</h2>
+<ol class="steps">
+<li>Place a little kibble inside each drawer.</li>
+<li>Set the timer on each drawer to open at different times.</li>
+<li>Your dog learns to return through the day for the next snack.</li>
+</ol>
+
+<button class="btn-add" id="addToCart">Add to cart</button>
+<p class="stock">In stock &mdash; ships free</p>
+</div>
+</section>
+
+<section class="cart-panel" id="cartPanel" aria-hidden="true">
+<div class="cart-header">
+<h2>Your cart</h2>
+<button class="close-cart" id="closeCart" aria-label="Close cart">&times;</button>
+</div>
+<div class="cart-items" id="cartItems">
+<p class="empty">Your cart is empty.</p>
+</div>
+<div class="cart-footer" id="cartFooter" style="display:none;">
+<div class="cart-total">
+<strong>Total:</strong> <span id="cartTotal">$0.00</span>
+</div>
+<button class="btn-checkout" id="checkoutBtn">Go to checkout</button>
+</div>
+</section>
+</main>
+
+<section class="checkout" id="checkout" style="display:none;">
+<div class="container">
+<h2>Checkout</h2>
+<p class="demo-note">Demo order &mdash; no payment required.</p>
+<form id="checkoutForm">
+<div class="form-row">
+<label>Full name <input type="text" name="name" required></label>
+</div>
+<div class="form-row">
+<label>Email <input type="email" name="email" required></label>
+</div>
+<div class="form-row">
+<label>Delivery address <input type="text" name="address" required></label>
+</div>
+<div class="form-row">
+<label>City <input type="text" name="city" required></label>
+</div>
+<div class="form-row">
+<label>Postal code <input type="text" name="postal" required></label>
+</div>
+<button type="submit" class="btn-place">Place demo order</button>
+<button type="button" class="btn-cancel" id="cancelCheckout">Back to cart</button>
+</form>
+</div>
+</section>
+
+<section class="confirmation" id="confirmation" style="display:none;">
+<div class="container">
+<h2>Order placed!</h2>
+<div class="order-card">
+<p>Thank you. Your demo order is confirmed.</p>
+<p><strong>Order number:</strong> <span id="orderNumber">-</span></p>
+<p>We'll deliver your SniffShift to:</p>
+<p id="orderAddress">-</p>
+</div>
+<button class="btn-continue" id="continueShopping">Continue shopping</button>
+</div>
+</section>
+
+<footer class="site-footer">
+<div class="container">SniffShift &mdash; demo shop. No real payments processed.</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
