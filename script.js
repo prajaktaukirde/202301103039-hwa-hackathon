@@ -99,6 +99,9 @@ closeCart.addEventListener('click', () => {
 cartPanel.addEventListener('click', (e) => {
   if (e.target === cartPanel) cartPanel.setAttribute('aria-hidden', 'true');
 });
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') cartPanel.setAttribute('aria-hidden', 'true');
+});
 
 checkoutBtn.addEventListener('click', () => {
   cartPanel.setAttribute('aria-hidden', 'true');

@@ -99,18 +99,90 @@ body {
   inset: 0;
   background: rgba(0,0,0,0.35);
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
+  justify-content: flex-end;
   z-index: 100;
-  padding-bottom: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
 }
-.cart-panel[aria-hidden="true"] { display: none; }
+.cart-panel[aria-hidden="false"] {
+  opacity: 1;
+  pointer-events: auto;
+  display: flex;
+}
 .cart-drawer {
   background: #fff;
   width: 100%;
   max-width: 420px;
-  border-radius: 12px 12px 0 0;
-  box-shadow: 0 -10px 30px rgba(0,0,0,0.15);
+  height: 100%;
+  border-radius: 0;
+  box-shadow: -10px 0 30px rgba(0,0,0,0.15);
   display: flex; flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.25s ease;
+}
+.cart-panel[aria-hidden="false"] .cart-drawer {
+  transform: translateX(0);
+}
+.cart-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px; border-bottom: 1px solid #eee;
+  flex-shrink: 0;
+}
+.cart-items {
+  flex: 1; overflow-y: auto; padding: 16px 20px;
+  flex-shrink: 0;
+}
+.empty { color: #888; font-size: 0.95rem; text-align: center; padding: 20px 0; }
+.cart-footer {
+  padding: 16px 20px; border-top: 1px solid #eee; background: #fafafa;
+  flex-shrink: 0;
+}
+
+/* Drawer illustration (replaces placeholder) */
+.drawer-illustration {
+  background: #e8efe6;
+  border: 2px dashed #7a9a7d;
+  border-radius: 12px;
+  height: 300px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.drawer-case {
+  width: 170px; height: 170px; background: #c9d6ca;
+  border-radius: 10px; position: relative; border: 4px solid #9db4a0;
+}
+.drawer {
+  position: absolute; bottom: 12px; left: 12px; right: 12px;
+  height: 64px; background: #b8c6ba; border-radius: 6px;
+  border: 3px solid #8fa391; overflow: hidden;
+}
+.drawer-front {
+  width: 100%; height: 100%; background: #a8b6aa;
+  border-radius: 4px; position: relative;
+}
+.drawer-open .drawer-front { transform: translateY(-46px); opacity: 0.6; }
+.drawer-interior {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: #8fa391; display: flex; align-items: flex-end;
+  justify-content: center; gap: 6px; padding-bottom: 10px;
+}
+.kibble {
+  width: 10px; height: 10px; background: #d9a441;
+  border-radius: 50% 50% 50% 0; opacity: 0.9;
+}
+.timer {
+  position: absolute; top: 8px; right: 8px; background: #2d3a2e;
+  color: #fff; font-size: 0.7rem; padding: 2px 6px; border-radius: 8px;
+}
+.drawer-closed {
+  position: absolute; top: 12px; left: 12px; right: 12px; bottom: 86px;
+  background: #a8b6aa; border-radius: 6px; border: 3px solid #8fa391;
+}
+.caption {
+  position: absolute; bottom: 10px; font-size: 0.8rem;
+  color: #4a6a4d; font-weight: 600; text-align: center; width: 100%;
 }
 .cart-header {
   display: flex; align-items: center; justify-content: space-between;
