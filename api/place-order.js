@@ -31,6 +31,6 @@ module.exports = async (req, res) => {
       },
     });
   } catch (err) {
-    return res.status(500).json({ ok: false, error: 'Server error' });
+    return res.status(500).json({ ok: false, error: err.message || 'Server error', bodyType: typeof req.body, hasBody: !!req.body });
   }
 };
