@@ -12,6 +12,13 @@ module.exports = async (req, res) => {
   }
 
   try {
+    const body = req.body || {};
+    let items = body.items;
+    if (typeof items === 'string') {
+      try { items = JSON.parse(items); } catch (e) { items = []; }
+    }
+    if (!Array.isArray(items)) items = [];
+
     const orderNumber = 'SN-' + Math.random().toString(36).toUpperCase().slice(2, 10);
 
     return res.status(200).json({
@@ -19,13 +26,13 @@ module.exports = async (req, res) => {
       orderNumber,
       order: {
         orderNumber,
-        name: null,
-        email: null,
-        address: null,
-        city: null,
-        postal: null,
-        items: null,
-        total: null,
+        name: body.name,
+        email: body.email,
+        address: body.address,
+        city: body.city,
+        postal: body.postal,
+        items,
+        total: body.total,
         createdAt: new Date().toISOString(),
       },
     });

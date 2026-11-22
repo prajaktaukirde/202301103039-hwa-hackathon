@@ -132,10 +132,19 @@ checkoutForm.addEventListener('submit', async (e) => {
   submitBtn.disabled = true;
 
   try {
+    const params = new URLSearchParams();
+    params.set('name', payload.name);
+    params.set('email', payload.email);
+    params.set('address', payload.address);
+    params.set('city', payload.city);
+    params.set('postal', payload.postal);
+    params.set('items', JSON.stringify(payload.items));
+    params.set('total', payload.total);
+
     const response = await fetch('/api/place-order', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: params,
     });
     const data = await response.json();
 
